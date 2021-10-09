@@ -1,10 +1,18 @@
 <html>
 <link rel='stylesheet' type='text/css' href='queue.css'>
-<div class="center">
-    <input name="uri" type="text" id="uri" value="">
-    <p class="link" style="cursor: pointer" onclick="postURI()">Add to Queue</p>
-</div>
 
+<body>
+    <div>
+        <a style="border: none 0px white;" href="/">
+            <img class="homeButton" src="img/home.png"></img>
+        </a>
+
+        <div class="center">
+            <input name="uri" type="text" id="uri" value="">
+            <p class="link" style="cursor: pointer" onclick="postURI()">Add to Queue</p>
+        </div>
+
+</body>
 <script>
     const postURI = () => {
         fetch('http://localhost:8080/queue', {

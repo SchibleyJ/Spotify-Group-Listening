@@ -43,3 +43,9 @@ button {
     background-color: #191414;
 
 }
+
+.homeButton {
+    padding: 10px;
+    aspect-ratio: 1;
+    width: 50px;
+}
