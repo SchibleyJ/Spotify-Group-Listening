@@ -1,0 +1,33 @@
+<html>
+<link rel='stylesheet' type='text/css' href='queue.css'>
+<div class="center">
+    <input name="uri" type="text" id="uri" value="">
+    <p class="link" style="cursor: pointer" onclick="postURI()">Add to Queue</p>
+</div>
+
+<script>
+    const postURI = () => {
+        fetch('http://localhost:8080/queue', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "uri": document.getElementById("uri").value, "code": getCookie('room') })
+        }).then(res => {
+            console.log(res);
+            document.getElementById("uri").value = null;
+        });
+    }
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+</script>
+
+</html>

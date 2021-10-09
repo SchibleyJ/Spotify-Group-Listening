@@ -1,0 +1,45 @@
+@font-face {
+    font-family: spotify;
+    src: url(https://fonts.cdnfonts.com/s/14898/Gotham-Black.woff);
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #191414;
+}
+
+.center {
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.link-parent {
+    text-align: center;
+    
+}
+
+.link {
+    height: 100%;
+    width: 100%;
+    color: #1DB954;
+    font-family: spotify, sans-serif;
+    text-align: center;
+    font-weight: 200;
+}
+
+a, a:hover, a:visited, a:active {
+    text-decoration: none;
+    text-align: center;
+}
+
+button {
+    border: 1px solid #1DB954;
+    background-color: #191414;
+
+}

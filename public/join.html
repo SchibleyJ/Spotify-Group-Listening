@@ -1,0 +1,27 @@
+<html>
+<link rel='stylesheet' type='text/css' href='join.css'>
+
+<body>
+    <div class="center">
+        <p class="link">Enter the code for the Spotify room.</p>
+        <br>
+        <input class="center" id="lobbyCode" name="lobbyCode" type="text" placeholder="e n t e r   c o d e" maxlength="3" /><br>
+        <br><a href="/queue" class="link" onclick="joinRoom()">Join Room</a>
+    </div>
+</body>
+
+</html>
+<script>
+    const joinRoom = () => {
+        fetch('http://localhost:8080/join', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "code": document.getElementById("lobbyCode").value })
+        }).then(res => {
+            console.log(res);
+            document.getElementById("lobbyCode").value = null;
+        });
+    }
+</script>

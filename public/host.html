@@ -1,0 +1,43 @@
+<html>
+<link rel='stylesheet' type='text/css' href='host.css'>
+
+<body>
+    <div class="center">
+        <p class="link">Now hosting a Group Session</p>
+        <p class="link">Set the code for your room:</p>
+        <br><br>
+        <input class="center" class="usernameInput" id="lobbyCode" name="lobbyCode" type="text" placeholder="e n t e r   c o d e"
+            maxlength="3" /><br>
+        <br><button onclick="createRoom()" class="link">Set Code</button>
+        <p class="link" id="currentCode"></p>
+    </div>
+    
+</body>
+
+</html>
+<script>
+    const createRoom = () => {
+        fetch('http://localhost:8080/update', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "code": document.getElementById("lobbyCode").value, "access_token": getCookie('access_token'), "refresh_token": getCookie('refresh_token') })
+        }).then(res => {
+            console.log(res);
+            document.getElementById("currentCode").innerHTML = "Current Code: " + document.getElementById("lobbyCode").value;
+            document.getElementById("lobbyCode").value = null;
+        });
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+</script>
