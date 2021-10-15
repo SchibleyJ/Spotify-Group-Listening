@@ -2,30 +2,48 @@
 <link rel='stylesheet' type='text/css' href='join.css'>
 
 <body>
-    <div >
-        <a style="border: none 0px white;" href="/">
+    <a style="border: none 0px white;" href="/">
         <img class="homeButton" src="img/home.png"></img>
     </a>
-    <div class="center">
-        <p class="link">Enter the code for the Spotify room.</p>
-        <br>
-        <input class="center" id="lobbyCode" name="lobbyCode" type="text" placeholder="e n t e r   c o d e" maxlength="3" /><br>
-        <br><a href="/queue" class="link" onclick="joinRoom()">Join Room</a>
+    <div class="container">
+        <div class="dummy"></div>
+        <div class="enter-code">
+            <p class="spotify-text">Enter the Room ID</p>
+            <input class="code-input" id="lobbyCode" name="lobbyCode" type="text" placeholder="_ _ _"
+                maxlength="3" /><br>
+        </div>
+        <div class="join">
+            <div class="join-button" onclick="joinRoom()">
+                <p class="spotify-text">Join Room</p>
+            </div>
+        </div>
     </div>
 </body>
 
 </html>
 <script>
     const joinRoom = () => {
-        fetch('http://localhost:8080/join', {
+        console.log('here')
+        fetch(`${window.location.origin}/join`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ "code": document.getElementById("lobbyCode").value })
         }).then(res => {
-            console.log(res);
-            document.getElementById("lobbyCode").value = null;
-        });
+            return res.json();
+
+        }).then(data => {
+            console.log(data)
+            if (data.room_exists) {
+                console.log('here')
+                window.location.href = "/queue";
+            } else {
+                alert("That room doesn't exist.")
+                document.getElementById("lobbyCode").value = null;
+            }
+        }
+
+        );
     }
 </script>

@@ -10,35 +10,121 @@ html, body {
     background-color: #191414;
 }
 
-.center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.container {
+    margin-top: 16vw;
+    display: flex;
+    flex-direction: column;
 }
 
-.link-parent {
-    text-align: center;
-    
+.search-bar {
+    width: 100vw;
+    margin-top: 10px;
 }
 
-.link {
-    height: 100%;
-    width: 100%;
+.results {
+    display: flex;
+    flex-direction: column;
+    grid-area: results;
+    width: 100vw;
+    height: 60vh;
+    margin-top: 15px;
+}
+
+
+.info {
+    grid-area: info;
+    width: 100vw;
+}
+
+.spotify-text {
     color: #1DB954;
     font-family: spotify, sans-serif;
     text-align: center;
     font-weight: 200;
+    font-size: 10vw;
+    margin: 2vh auto;
 }
 
-a, a:hover, a:visited, a:active {
-    text-decoration: none;
+.medium-text {
+    padding: 10vh;
+    color: #1DB954;
+    font-family: spotify, sans-serif;
     text-align: center;
+    font-weight: 200;
+    font-size: 7vw;
+}
+
+.small-text {
+    color: #1DB954;
+    font-family: spotify, sans-serif;
+    text-align: center;
+    font-weight: 200;
+    font-size: 5vw;
+}
+
+.search {
+    background-color: gray;
+    color: black;
+    width: 70vw;
+    height: 8vw;
+    padding: 20px;
+    border: none;
+    font-family: spotify, sans-serif;
+    text-align: center;
+    font-weight: 200;
+    font-size: 5vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.song {
+    height: 16vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.name {
+    vertical-align: top;
+    color: lightgray;
+    font-family: spotify, sans-serif;
+    font-weight: 50;
+    font-size: 5vw;
+}
+.artists {
+    color: lightgray;
+    font-family: spotify, sans-serif;
+    font-weight: 50;
+    font-size: 3vw;
+}
+.song-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.picture {
+    width: 15vw;
+    height: 15vw;
+    aspect-ratio: 1;
+    padding: 5px;
+    border: none;
+    aspect-ratio: 1;
 }
 
 .homeButton {
+    position: absolute;
     padding: 10px;
     aspect-ratio: 1;
-    width: 50px;
+    width: 15vw;
+}
+
+button {
+    margin: 15px;
+    padding: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid #1DB954;
+    background-color: #191414;
+    border-radius: 20px;
 }

@@ -2,39 +2,58 @@
 <link rel='stylesheet' type='text/css' href='host.css'>
 
 <body>
-    <div >
-        <a style="border: none 0px white;" href="/">
+
+    <a style="border: none 0px white;" href="/">
         <img class="homeButton" src="img/home.png"></img>
     </a>
-    <div class="center">
-        <p class="link">Now hosting a Group Session</p>
-        <p class="link">Set the code for your room:</p>
-        <br><br>
-        <input class="center" class="usernameInput" id="lobbyCode" name="lobbyCode" type="text" placeholder="e n t e r   c o d e"
-            maxlength="3" /><br>
-        <br><button onclick="createRoom()" class="link">Set Code</button>
-        <p class="link" id="currentCode"></p>
+    <div class="container">
+        <div class="info">
+            <p class="medium-text">Now hosting a Group Session</p>
+        </div>
+        <div class="set-code">
+            <p class="spotify-text">Room ID:</p>
+            <div style="width: 100%">
+                <input class="code-input" id="lobbyCode" name="lobbyCode" type="text" placeholder="_ _ _"
+                    maxlength="3" />
+            </div>
+            <p class="small-text">Tap to Edit</p>
+        </div>
+        <div class="end-room">
+            <a onclick="updateRoom(currentCode)" class="end-room-link" href="/"><span class="small-text">End
+                    Room</span></a>
+
+
+        </div>
     </div>
-    
 </body>
 
 </html>
+
+
 <script>
-    const createRoom = () => {
-        fetch('http://localhost:8080/update', {
+    let currentCode;
+    const updateRoom = (deleteCode) => {
+        let newCode = document.getElementById("lobbyCode").value;
+        console.log('here')
+        fetch(`${window.location.origin}/update`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "code": document.getElementById("lobbyCode").value, "access_token": getCookie('access_token'), "refresh_token": getCookie('refresh_token') })
+            body: JSON.stringify({ "code": newCode, "delete_code": deleteCode, "access_token": getCookie('access_token'), "refresh_token": getCookie('refresh_token') })
         }).then(res => {
-            console.log(res);
-            document.getElementById("currentCode").innerHTML = "Current Code: " + document.getElementById("lobbyCode").value;
-            document.getElementById("lobbyCode").value = null;
+            return res.json();
+        }).then(data => {
+            if (data.valid_req){
+            currentCode = document.getElementById("lobbyCode").value;
+            } else {
+                document.getElementById("lobbyCode").value = null;
+                alert("That room ID is already being used.")
+            }
         });
     }
 
-    function getCookie(name) {
+    const getCookie = (name) => {
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
@@ -44,4 +63,12 @@
         }
         return null;
     }
+
+    document.querySelector('input').addEventListener('change', () => { updateRoom(currentCode) });
+
+    window.onbeforeunload = function () {
+        updateRoom(currentCode)
+        return null;
+    };
+
 </script>

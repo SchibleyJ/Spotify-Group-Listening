@@ -10,30 +10,71 @@ html, body {
     background-color: #191414;
 }
 
-.center {
-    text-align: center;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.info {
+height: 33vh;
+}
+.set-code {
+    height: 33vh;
 }
 
 .link-parent {
     text-align: center;
-    
 }
 
-.link {
-    height: 100%;
-    width: 100%;
+.spotify-text {
     color: #1DB954;
     font-family: spotify, sans-serif;
     text-align: center;
     font-weight: 200;
+    font-size: 10vw;
+    margin: 2vh auto;
 }
 
+.medium-text {
+    padding: 10vh;
+    color: #1DB954;
+    font-family: spotify, sans-serif;
+    text-align: center;
+    font-weight: 200;
+    font-size: 7vw;
+}
+
+.small-text {
+    color: #1DB954;
+    font-family: spotify, sans-serif;
+    text-align: center;
+    font-weight: 200;
+    font-size: 5vw;
+}
+
+.code-input {
+    background-color: #191414;
+    color: gray;
+    width: 50%;
+    height: 50%;
+    padding: 20px;
+    border: none;
+    font-family: spotify, sans-serif;
+    text-align: center;
+    font-weight: 200;
+    font-size: 20vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 a, a:hover, a:visited, a:active {
+    padding: 10px;
+    margin-bottom: 5vh;
     text-decoration: none;
     text-align: center;
 }
@@ -41,11 +82,23 @@ a, a:hover, a:visited, a:active {
 button {
     border: 1px solid #1DB954;
     background-color: #191414;
-
 }
 
 .homeButton {
+    position: absolute;
     padding: 10px;
     aspect-ratio: 1;
-    width: 50px;
+    width: 15vw;
+}
+
+.end-room{
+display: flex;
+height: 100%;
+justify-content: center;
+}
+
+.end-room-link{
+    align-self: flex-end;
+    border: 5px solid #1DB954;
+    border-radius: 20px;
 }

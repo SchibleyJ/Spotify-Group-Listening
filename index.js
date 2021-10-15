@@ -1,16 +1,30 @@
-const http = require('http');
+require('dotenv').config();
+/* 
+ *  TODO:
+ *
+ * 
+ * 2. Reformat all CSS to use the grid layout.  This includes fixing all .css files
+ * to actually align with the current .html files instead of still having chess
+ * reminance.  CSS should be primarily focused on mobile.
+ * 
+ * 3. Add features to the rooms to prevent people from creating rooms "over" eachother.
+ * Also, add "end room" feature for host to remove his room from the stored state.
+ * 
+ * 
+ */
+
+const axios = require('axios').default;
 const express = require('express');
 const app = express();
 const port = 8080;
-const request = require('request');
 const { URLSearchParams } = require('url');
-
+//console.log(process.env.CLIENT_ID)
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
-let client_id = 'd417aaa0e7e34ec688d8452b2b7a176c'; // Your client id
-let client_secret = 'abeaaa85bb3547df8ea3fbfc4c6aafc5'; // Your secret
-let redirect_uri = 'http://localhost:8080/callback'; // Your redirect uri
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.SECRET_ID;;
+const redirect_uri = 'http://192.168.86.21:8080/callback';
 
 
 let tokens = {};
@@ -37,87 +51,72 @@ app.get('/callback', function (req, res) {
     // your application requests refresh and access tokens
     // after checking the state parameter
 
-    var code = req.query.code || null;
-
-    var authOptions = {
-        url: 'https://accounts.spotify.com/api/token',
-        form: {
+    let code = req.query.code || null;
+    axios.post('https://accounts.spotify.com/api/token',
+        new URLSearchParams({
             code: code,
             redirect_uri: redirect_uri,
             grant_type: 'authorization_code'
-        },
-        headers: {
-            'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
-        },
-        json: true
-    };
+        }).toString(),
+        {
+            headers: {
+                'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+    ).then(response => {
+        if (response.status === 200) {
 
-    request.post(authOptions, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-
-            var access_token = body.access_token,
-                refresh_token = body.refresh_token;
-
-            var options = {
-                url: 'https://api.spotify.com/v1/me',
-                headers: { 'Authorization': 'Bearer ' + access_token },
-                json: true
-            };
-
-            // use the access token to access the Spotify Web API
-            request.get(options, function (error, response, body) {
-                //console.log(body);
-            });
-
-            // we can also pass the token to the browser to make requests from there
             let params = new URLSearchParams({
-                access_token: access_token,
-                refresh_token: refresh_token
+                access_token: response.data.access_token,
+                refresh_token: response.data.refresh_token
             }).toString();
+
             res.redirect('/form?' +
                 params);
         } else {
-            let params = new URLSearchParams({
-                error: 'invalid_token'
-            }).toString();
-            res.redirect('/form#' +
-                params);
+            console.log(response)
         }
-    });
+
+    }).catch(err => {
+        console.log(err);
+    })
+
 });
 
 app.get('/refresh_token', function (req, res) {
 
     // requesting access token from refresh token
-    var refresh_token = req.query.refresh_token;
-    var authOptions = {
-        url: 'https://accounts.spotify.com/api/token',
-        headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
-        form: {
-            grant_type: 'refresh_token',
-            refresh_token: refresh_token
-        },
-        json: true
-    };
+    let refresh_token = req.query.refresh_token;
 
-    request.post(authOptions, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            var access_token = body.access_token;
+    axios.get('https://accounts.spotify.com/api/token',
+        new URLSearchParams({
+            refresh_token: refresh_token,
+            grant_type: 'authorization_code'
+        }).toString(),
+        {
+            headers:
+            {
+                'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+    ).then(response => {
+        if (response.status === 200) {
+            let access_token = body.access_token;
             res.send({
                 'access_token': access_token
             });
         }
+    }).catch(err => {
+        console.log(err)
     });
+
 });
 
 app.get('/form', (req, res) => {
-    // maybe make room id here?
-    // then can save it to object
-
-    //res.sendFile(__dirname + '/public/index.html')
-    res.cookie('access_token', req.query.access_token)
-    res.cookie('refresh_token', req.query.refresh_token)
-
+    res.cookie('access_token', req.query.access_token, {secure: false, httpOnly: false })
+    res.cookie('refresh_token', req.query.refresh_token, {secure: false, httpOnly: false })
     res.redirect('/host');
 });
 
@@ -139,42 +138,101 @@ app.get('/join', (req, res) => {
 
 app.post('/join', (req, res) => {
     let code = req.body.code;
-    res.cookie('room', code)
-    console.log('here')
-    res.redirect('/queue');
+    if (tokens[code]) {
+        res.cookie('room', code, {secure: false, httpOnly: false });
+        res.send(JSON.stringify({ room_exists: true }));
+    } else {
+        res.send(JSON.stringify({ room_exists: false }));
+    }
+
 })
 
 
 app.post('/queue', (req, res) => {
     let uri = req.body.uri;
     let code = req.body.code;
-    var options = {
-        url: `https://api.spotify.com/v1/me/player/queue?uri=${uri}`,
-        headers: {
-            'Authorization': 'Bearer ' + tokens[code]["access_token"]
-        },
-        json: true
-    };
+    // i dont understand why the uri must be put in the actual url here rather than
+    // as URLSearchParams, i think its something to do with how it's parsed but
+    // i cannot pass it in unparsed either
 
-    console.log('sent')
-    request.post(options, (err, response, body) => {
-        res.send('test')
+    //for demo purposes lol
+    if (code == null) {
+        code = "abc";
+    }
 
-    })
+    axios.post(`https://api.spotify.com/v1/me/player/queue?uri=${uri}`,
+        null,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + tokens[code]["access_token"],
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+    ).then(response => {
+        res.send('done')
+    }).catch(err => {
+        console.log(err)
+    });
 });
 
 app.post('/update', (req, res) => {
     let code = req.body.code;
+    let delete_code = req.body.delete_code;
     let access_token = req.body.access_token;
     let refresh_token = req.body.refresh_token;
-    tokens[code] = {
-        'access_token': access_token,
-        'refresh_token': refresh_token
+    if (tokens[code] && code !== delete_code) {
+        res.send(JSON.stringify({valid_req: false}));
+    } else {
+        if (code) {
+            tokens[code] = {
+                'access_token': access_token,
+                'refresh_token': refresh_token
+            }
+        }
+        if (delete_code) {
+            delete tokens[delete_code];
+        }
+        res.send(JSON.stringify({valid_req: true}));
     }
-    console.log(tokens);
-    res.send('sent');
-
 });
+
+app.post('/search', (req, res) => {
+    let code = req.body.code;
+    let search = req.body.search;
+    //for demo purposes lol
+    if (code == null) {
+        code = "abc";
+    }
+    axios.get(`https://api.spotify.com/v1/search?q=${search}&type=track&market=US&limit=5`,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + tokens[code]["access_token"],
+                'Conent-Type': 'application/json'
+            }
+        }).then(response => {
+            let body = response.data;
+            let songResponse = [];
+            for (let i = 0; i < body.tracks.items.length; i++) {
+                console.log(body.tracks.items[i].name);
+                songResponse.push(
+                    {
+                        'name': body.tracks.items[i].name,
+                        'artists': [],
+                        'album': body.tracks.items[i].album.name,
+                        'image': body.tracks.items[i].album.images[0].url,
+                        'uri': body.tracks.items[i].uri
+                    }
+                )
+                for (let j = 0; j < body.tracks.items[i].artists.length; j++) {
+                    songResponse[songResponse.length - 1].artists.push(body.tracks.items[i].artists[j].name)
+                }
+            }
+            res.send(JSON.stringify(songResponse));
+        }).catch(err => {
+            console.log(err)
+        });;
+
+})
 
 
 app.listen(port, () => {
