@@ -5,12 +5,13 @@
     <a style="border: none 0px white;" href="/">
         <img class="homeButton" src="img/home.png"></img>
     </a>
-    <div class="container">
+    <div onclick="clearsearch()" class="container">
         <div class="search-bar">
             <p style="margin-top: 10px;"class="spotify-text">Search for Songs:</p>
             <input name="search" type="text" class="search" id="search" value="">
             <button onclick="search()"><span class="small-text">Search</span></button>
         </div>
+        <p class="small-text" style="color: grey" id="search-info-p"></p>
         <div class="results">
             <div class="song" id="song0" onclick="getURI(0)">
                 <image src='./img/temp.png' class="picture" id="song0picture">
@@ -78,6 +79,7 @@
                 document.getElementById(`song${i}name`).innerHTML = null;
                 document.getElementById(`song${i}artists`).innerHTML = null;
             }
+            document.getElementById('search-info-p').innerHTML = "Song successfully queued.";
         });
     }
     const getCookie = (name) => {
@@ -107,6 +109,7 @@
                 document.getElementById(`song${i}name`).innerHTML = shorten(data[i].name);
                 document.getElementById(`song${i}artists`).innerHTML = shorten(data[i].artists.join(', '));
             }
+            document.getElementById('search-info-p').innerHTML = "Showing top 5 results:";
         });
     }
 
@@ -122,6 +125,11 @@
             return text
         }
 
+    }
+
+    const clearsearch = () => {
+        if (document.getElementById('search-info-p').innerHTML[1] == "o")
+        document.getElementById('search-info-p').innerHTML = "";
     }
 </script>
 

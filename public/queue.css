@@ -114,7 +114,7 @@ html, body {
 .homeButton {
     position: absolute;
     padding: 10px;
-    aspect-ratio: 1;
+    aspect-ratio: 245/201;
     width: 15vw;
 }
 
