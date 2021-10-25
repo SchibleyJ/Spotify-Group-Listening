@@ -30,7 +30,6 @@ html, body {
     margin-top: 15px;
 }
 
-
 .info {
     grid-area: info;
     width: 100vw;
@@ -91,12 +90,14 @@ html, body {
     font-weight: 50;
     font-size: 5vw;
 }
+
 .artists {
     color: lightgray;
     font-family: spotify, sans-serif;
     font-weight: 50;
     font-size: 3vw;
 }
+
 .song-info {
     display: flex;
     flex-direction: column;
@@ -116,6 +117,7 @@ html, body {
     padding: 10px;
     aspect-ratio: 245/201;
     width: 15vw;
+    max-width: 10vh;
 }
 
 button {
@@ -127,4 +129,47 @@ button {
     border: 5px solid #1DB954;
     background-color: #191414;
     border-radius: 20px;
+}
+
+@media screen and (min-width: 600px) {
+    .container {
+        margin: auto;
+    }
+    .spotify-text {
+        font-size: 5vh;
+    }
+    .medium-text {
+        font-size: 5vh;
+    }
+    .small-text {
+        font-size: 3vh;
+    }
+    button {
+        margin: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 3px;
+        border-width: 2px;
+    }
+    .code-input {
+        font-size: 10vh;
+    }
+    .search {
+        height: 5vh;
+        width: 40vw;
+        font-size: 5vh;
+    }
+    .picture {
+        width: 10vh;
+        height: 10vh;
+    }
+    .name {
+        font-size: 4vh;
+    }
+    .artists {
+        font-size: 3vh;
+    }
+    .results{
+        margin-left: 5vw;
+    }
 }

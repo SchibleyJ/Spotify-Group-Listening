@@ -24,7 +24,7 @@ app.use(express.json());
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.SECRET_ID;;
-const redirect_uri = 'http://192.168.86.21:8080/callback';
+const redirect_uri = 'http://localhost:8080/callback';
 
 
 let tokens = {};

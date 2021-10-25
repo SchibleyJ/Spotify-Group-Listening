@@ -91,6 +91,7 @@ button {
     padding: 10px;
     aspect-ratio: 245/201;
     width: 15vw;
+    max-width: 10vh;
 }
 
 .end-room{
@@ -103,4 +104,24 @@ justify-content: center;
     align-self: flex-end;
     border: 5px solid #1DB954;
     border-radius: 20px;
+}
+
+@media screen and (min-width: 600px) {
+    .spotify-text {
+        font-size: 7vh;
+    }
+    .medium-text {
+        font-size: 5vh;
+    }
+    .small-text{
+        font-size: 3vh;
+
+    }
+    .code-input {
+        font-size: 10vh;
+    }
+    .link{
+        width: 60vw;
+        margin: 2vh auto;
+    }
 }
