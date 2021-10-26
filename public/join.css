@@ -57,8 +57,8 @@ html, body {
 .code-input {
     background-color: #191414;
     color: gray;
-    width: 50%;
-    height: 50%;
+    width: 20vw;
+    height: 20vh;
     padding: 20px;
     border: none;
     font-family: spotify, sans-serif;
@@ -113,6 +113,6 @@ a, a:hover, a:visited, a:active {
         margin: 2vh auto;
     }
     .join-button {
-        width: 50vw;
+        width: 40vw;
     }
 }

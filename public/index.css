@@ -18,7 +18,7 @@ html, body {
 }
 
 .link{
-    margin: 50px;
+    margin: 20px auto;
     padding: 20px;
     text-align: center;
     border: solid #1DB954 5px;
@@ -30,10 +30,18 @@ html, body {
     font-family: spotify, sans-serif;
     text-align: center;
     font-weight: 200;
-    font-size: 10vw;
+    font-size: 9vw;
     
 }
 
+.host{
+width: 90vw;
+margin: auto;
+}
+.queue{
+    margin: auto;
+    width: 90vw;
+}
 a, a:hover, a:visited, a:active {
     text-decoration: none;
     text-align: center;
@@ -55,7 +63,7 @@ a, a:hover, a:visited, a:active {
         font-size: 7vh;
     }
     .link{
-        width: 60vw;
+        width: 40vw;
         margin: 2vh auto;
     }
 }
