@@ -55,7 +55,6 @@ a, a:hover, a:visited, a:active {
  display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 7vh;
 }
 
 @media screen and (min-width: 600px) {
