@@ -19,7 +19,7 @@ const app = express();
 const port = 8080;
 const { URLSearchParams } = require('url');
 //console.log(process.env.CLIENT_ID)
-app.use(express.static(__dirname + '/public'));
+app.use('/img', express.static(__dirname + '/public/img'));
 app.use(express.json());
 
 const client_id = process.env.CLIENT_ID;
@@ -121,19 +121,23 @@ app.get('/form', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html')
+    app.use(express.static(__dirname + '/public/index'));
+    res.sendFile(__dirname + '/public/index/index.html')
 });
 app.get('/queue', (req, res) => {
-    res.sendFile(__dirname + '/public/queue.html')
+    app.use(express.static(__dirname + '/public/queue'));
+    res.sendFile(__dirname + '/public/queue/queue.html')
 });
 
 app.get('/host', (req, res) => {
-    res.sendFile(__dirname + '/public/host.html')
+    app.use(express.static(__dirname + '/public/host'));
+    res.sendFile(__dirname + '/public/host/host.html')
 });
 
 
 app.get('/join', (req, res) => {
-    res.sendFile(__dirname + '/public/join.html')
+    app.use(express.static(__dirname + '/public/join'));
+    res.sendFile(__dirname + '/public/join/join.html')
 })
 
 app.post('/join', (req, res) => {

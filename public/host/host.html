@@ -1,0 +1,34 @@
+<html>
+<link rel='stylesheet' type='text/css' href='host.css'>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<body>
+
+    <a style="border: none 0px white;" href="/">
+        <img class="homeButton" src="img/home.png"></img>
+    </a>
+    <div class="container">
+        <div class="info">
+            <p class="medium-text">Now hosting a Group Session</p>
+        </div>
+        <div class="set-code">
+            <p class="spotify-text">Room ID:</p>
+            <div style="width: 100%">
+                <input class="code-input" id="lobbyCode" name="lobbyCode" type="tel" placeholder="_ _ _"
+                    maxlength="3" />
+            </div>
+            <p class="small-text">Tap to Edit</p>
+        </div>
+        <div class="end-room">
+            <a onclick="updateRoom(currentCode)" class="end-room-link" href="/"><span class="small-text">End
+                    Room</span></a>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<script src="host.js">
+</script>

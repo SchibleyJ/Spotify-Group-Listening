@@ -1,0 +1,66 @@
+<html>
+<link rel='stylesheet' type='text/css' href='queue.css'>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
+<body>
+    <a style="border: none 0px white;" href="/">
+        <img class="homeButton" src="img/home.png"></img>
+    </a>
+    <div onclick="clearsearch()" class="container">
+        <div class="search-bar">
+            <p style="margin-top: 10px;" class="spotify-text">Search for Songs:</p>
+            <input name="search" type="text" class="search" id="search" value="">
+            <button onclick="search()"><span class="small-text">Search</span></button>
+        </div>
+        <p class="small-text" style="color: grey" id="search-info-p"></p>
+        <div class="results">
+            <div class="song" id="song0" onclick="getURI(0)">
+                <image src='./img/temp.png' class="picture" id="song0picture">
+                </image>
+                <div class="song-info">
+                    <div class="name" id="song0name"></div>
+                    <div class="artists" id="song0artists"></div>
+                </div>
+            </div>
+            <div class="song" id="song1" onclick="getURI(1)">
+                <image src='./img/temp.png' class="picture" id="song1picture">
+                </image>
+                <div class="song-info">
+                    <div class="name" id="song1name"></div>
+                    <div class="artists" id="song1artists"></div>
+                </div>
+            </div>
+            <div class="song" id="song2" onclick="getURI(2)">
+                <image src='./img/temp.png' class="picture" id="song2picture">
+                </image>
+                <div class="song-info">
+                    <div class="name" id="song2name"></div>
+                    <div class="artists" id="song2artists"></div>
+                </div>
+            </div>
+            <div class="song" id="song3" onclick="getURI(3)">
+                <image src='./img/temp.png' class="picture" id="song3picture">
+                </image>
+                <div class="song-info">
+                    <div class="name" id="song3name"></div>
+                    <div class="artists" id="song3artists"></div>
+                </div>
+            </div>
+            <div class="song" id="song4" onclick="getURI(4)">
+                <image src='./img/temp.png' class="picture" id="song4picture">
+                </image>
+                <div class="song-info">
+                    <div class="name" id="song4name"></div>
+                    <div class="artists" id="song4artists"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="info"></div>
+    </div>
+
+</body>
+<script src="queue.js">
+</script>
+
+</html>
