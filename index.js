@@ -1,17 +1,10 @@
 require('dotenv').config();
-/* 
- *  TODO:
- *
- * 
- * 2. Reformat all CSS to use the grid layout.  This includes fixing all .css files
- * to actually align with the current .html files instead of still having chess
- * reminance.  CSS should be primarily focused on mobile.
- * 
- * 3. Add features to the rooms to prevent people from creating rooms "over" eachother.
- * Also, add "end room" feature for host to remove his room from the stored state.
- * 
- * 
- */
+
+/*
+*   Fix CSS on QUEUE
+*   Mobile/Desktop
+*   Make sure scroll works with 10 results, spread out desktop view more
+*/
 
 const axios = require('axios').default;
 const express = require('express');

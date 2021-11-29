@@ -12,10 +12,8 @@ let currentSearchData;
             },
             body: JSON.stringify({ "uri": uri, "code": getCookie('room') })
         }).then(res => {
-            for (let i = 0; i < 5; i++) {
-                document.getElementById(`song${i}picture`).src = './img/temp.png';
-                document.getElementById(`song${i}name`).innerHTML = null;
-                document.getElementById(`song${i}artists`).innerHTML = null;
+            for (let i = 0; i < 10; i++) {
+                document.getElementById(i + "song").remove();
             }
             document.getElementById('search-info-p').innerHTML = "Song successfully queued.";
         });
@@ -42,13 +40,30 @@ let currentSearchData;
             return res.json();
         }).then((data) => {
             currentSearchData = data;
-            for (let i = 0; i < data.length; i++) {
-                document.getElementById(`song${i}picture`).src = data[i].image;
-                document.getElementById(`song${i}name`).innerHTML = shorten(data[i].name);
-                document.getElementById(`song${i}artists`).innerHTML = shorten(data[i].artists.join(', '));
-            }
-            document.getElementById('search-info-p').innerHTML = "Showing top 5 results:";
+            
+            displayResults(data);
+            document.getElementById('search-info-p').innerHTML = "Showing top 10 results:";
         });
+    }
+
+    const displayResults = (results) => {
+        if ('content' in document.createElement('template')) {
+            for (let i = 0; i < 10; i++) {
+                let parent = document.getElementById('results');
+                let template = document.querySelector('#song-template')
+    
+                let clone = template.content.cloneNode(true);
+                //console.log(clone.children)
+                clone.querySelector('.picture').src = results[i].image;
+                console.log(clone.querySelector('.song-info'));
+                clone.querySelector('.song-info').querySelector('.name').innerHTML = shorten(results[i].name);
+                clone.querySelector('.song-info').querySelector('.artists').innerHTML = shorten(results[i].artists.join(', '));
+                
+                clone.children[0].id = i + 'song';
+    
+                parent.appendChild(clone);
+            }
+        }
     }
 
     const search = () => {

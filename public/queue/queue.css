@@ -14,6 +14,7 @@ html, body {
     margin-top: 6vh;
     display: flex;
     flex-direction: column;
+    
 }
 
 .search-bar {
@@ -24,14 +25,13 @@ html, body {
 .results {
     display: flex;
     flex-direction: column;
-    grid-area: results;
     width: 100vw;
     height: 60vh;
     margin-top: 15px;
+    overflow-y: auto;
 }
 
 .info {
-    grid-area: info;
     width: 100vw;
 }
 
@@ -169,5 +169,19 @@ button {
     }
     .results{
         margin-left: 5vw;
+    }
+    .song{
+        height: 10vh;
+    }
+
+    .search-bar{
+        width: 40vw;
+    }
+    .search-bar-container{
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+justify-content: flex-end;
+width: 100vw;
     }
 }
