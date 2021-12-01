@@ -200,11 +200,11 @@ app.post('/search', (req, res) => {
     if (code == null) {
         code = "abc";
     }
-    axios.get(`https://api.spotify.com/v1/search?q=${search}&type=track&market=US&limit=5`,
+    axios.get(`https://api.spotify.com/v1/search?q=${search}&type=track&market=US&limit=10`,
         {
             headers: {
                 'Authorization': 'Bearer ' + tokens[code]["access_token"],
-                'Conent-Type': 'application/json'
+                'Conent-Type': 'application/json' 
             }
         }).then(response => {
             let body = response.data;

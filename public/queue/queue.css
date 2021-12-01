@@ -11,10 +11,12 @@ html, body {
 }
 
 .container {
-    margin-top: 6vh;
+    height: 100vh;
+    width: 100vw;
+    margin-top: 0px;
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .search-bar {
@@ -26,9 +28,14 @@ html, body {
     display: flex;
     flex-direction: column;
     width: 100vw;
-    height: 60vh;
+    height: 50vh;
     margin-top: 15px;
     overflow-y: auto;
+}
+
+#results {
+    padding-left: 0px;
+    
 }
 
 .info {
@@ -38,11 +45,12 @@ html, body {
 .spotify-text {
     color: #1DB954;
     font-family: spotify, sans-serif;
-    text-align: center;
     font-weight: 200;
     font-size: 7vw;
     margin: 2vh auto;
     width: 70vw;
+    text-align: center;
+
 }
 
 .medium-text {
@@ -71,12 +79,11 @@ html, body {
     padding: 20px;
     border: none;
     font-family: spotify, sans-serif;
-    text-align: center;
     font-weight: 200;
     font-size: 5vh;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    text-align: center;
 }
 
 .song {
@@ -135,53 +142,78 @@ button {
     border-radius: 20px;
 }
 
+.search-bar-container {
+    margin-top: 5vh;
+}
+
 @media screen and (min-width: 600px) {
     .container {
+        height: 100vh;
+        width: 100vw;
         margin: auto;
     }
+
     .spotify-text {
+
+        text-align: left;
+
         font-size: 5vh;
     }
+
     .medium-text {
         font-size: 5vh;
     }
+
     .small-text {
         font-size: 3vh;
     }
-   
+
     .code-input {
         font-size: 10vh;
     }
+
     .search {
         height: 5vh;
-        width: 40vw;
+        padding: 2vh;
+        width: 30vw;
         font-size: 5vh;
+
     }
+
     .picture {
         width: 10vh;
         height: 10vh;
     }
+
     .name {
         font-size: 4vh;
     }
+
     .artists {
         font-size: 3vh;
     }
-    .results{
+
+    .results {
         margin-left: 5vw;
     }
-    .song{
+
+    #results {
+        height: 80vh;
+    }
+
+    .song {
         height: 10vh;
     }
 
-    .search-bar{
+    .search-bar {
         width: 40vw;
     }
-    .search-bar-container{
+
+    .search-bar-container {
         position: absolute;
         display: flex;
         flex-direction: row;
-justify-content: flex-end;
-width: 100vw;
+        justify-content: flex-end;
+        width: 100vw;
     }
 }

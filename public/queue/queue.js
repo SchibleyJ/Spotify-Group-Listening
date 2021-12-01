@@ -39,6 +39,7 @@ let currentSearchData;
         }).then(res => {
             return res.json();
         }).then((data) => {
+            console.log(data)
             currentSearchData = data;
             
             displayResults(data);
@@ -72,8 +73,8 @@ let currentSearchData;
     }
 
     const shorten = (text) => {
-        if (text.length > 20) {
-            return text.substring(0, 20) + "...";
+        if (text.length > 27) {
+            return text.substring(0, 27) + "...";
         } else {
             return text
         }
