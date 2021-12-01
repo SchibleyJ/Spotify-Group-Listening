@@ -1,8 +1,6 @@
 require('dotenv').config();
 
 /*
-*   Fix CSS on QUEUE
-*   Mobile/Desktop
 *   Make sure scroll works with 10 results, spread out desktop view more
 */
 

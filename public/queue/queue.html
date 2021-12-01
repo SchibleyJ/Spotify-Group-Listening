@@ -6,22 +6,24 @@
     <a style="border: none 0px white;" href="/">
         <img class="homeButton" src="img/home.png"></img>
     </a>
-    <div class="search-bar-container">
-        <div class="search-bar">
-            <p style="margin-top: 10px;" class="spotify-text">Search for Songs:</p>
-            <input name="search" type="text" class="search" id="search" value="">
-            <button onclick="search()"><span class="small-text">Search</span></button>
-            <p class="small-text" style="color: grey" id="search-info-p"></p>
+    <div class="container">
+        <div class="search-bar-container">
+            <div class="search-bar">
+                <p style="margin-top: 10px;" class="spotify-text">Search for Songs:</p>
+                <input name="search" type="text" class="search" id="search" value="">
+                <button onclick="search()"><span class="small-text">Search</span></button>
+                <p class="small-text" style="color: grey" id="search-info-p"></p>
+            </div>
         </div>
-    </div>
-    <div onclick="clearsearch()" class="container">
-        <div class="results">
-            <ul id="results">
+        <div onclick="clearsearch()" class="results-container">
+            <div class="results">
+                <ul id="results">
 
-            </ul>
+                </ul>
+            </div>
+
+            <div class="info"></div>
         </div>
-
-        <div class="info"></div>
     </div>
     <template id="song-template">
         <li class="song" onclick="getURI(parseInt(this.id))">

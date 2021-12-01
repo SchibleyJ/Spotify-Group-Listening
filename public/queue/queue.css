@@ -10,13 +10,12 @@ html, body {
     background-color: #191414;
 }
 
-.container {
+.results-container {
     height: 100vh;
-    width: 100vw;
     margin-top: 0px;
     display: flex;
     flex-direction: column;
-
+    
 }
 
 .search-bar {
@@ -27,10 +26,10 @@ html, body {
 .results {
     display: flex;
     flex-direction: column;
-    width: 100vw;
     height: 50vh;
     margin-top: 15px;
     overflow-y: auto;
+    
 }
 
 #results {
@@ -48,7 +47,6 @@ html, body {
     font-weight: 200;
     font-size: 7vw;
     margin: 2vh auto;
-    width: 70vw;
     text-align: center;
 
 }
@@ -142,20 +140,30 @@ button {
     border-radius: 20px;
 }
 
+.container{
+    display: flex;
+    flex-direction: column;
+}
 .search-bar-container {
     margin-top: 5vh;
 }
 
+li{
+    padding: 3px;
+    background-color: #181818;
+}
 @media screen and (min-width: 600px) {
-    .container {
+    .results-container {
         height: 100vh;
-        width: 100vw;
         margin: auto;
+        width: 60vw;
+        margin-top: 3vh;
+        
     }
 
     .spotify-text {
 
-        text-align: left;
+        text-align: center;
 
         font-size: 5vh;
     }
@@ -176,7 +184,7 @@ button {
         height: 5vh;
         padding: 2vh;
         width: 30vw;
-        font-size: 5vh;
+        font-size: 4vh;
 
     }
 
@@ -194,11 +202,12 @@ button {
     }
 
     .results {
-        margin-left: 5vw;
-    }
+        margin-left: 10vw;
+        height: 80%;
+}
 
     #results {
-        height: 80vh;
+        height: 100%;
     }
 
     .song {
@@ -209,11 +218,9 @@ button {
         width: 40vw;
     }
 
-    .search-bar-container {
-        position: absolute;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        width: 100vw;
+    .container{
+        flex-direction: row-reverse;
     }
+
+    
 }
