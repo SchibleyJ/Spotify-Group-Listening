@@ -1,4 +1,4 @@
-let currentSearchData;
+let currentSearchData = [];
 
     const getURI = (songNum) => {
         postURI(currentSearchData[songNum].uri);
@@ -40,6 +40,9 @@ let currentSearchData;
             return res.json();
         }).then((data) => {
             console.log(data)
+            for (let i = 0; i < currentSearchData.length; i++) {
+                document.getElementById(i + "song").remove();
+            }
             currentSearchData = data;
             
             displayResults(data);
