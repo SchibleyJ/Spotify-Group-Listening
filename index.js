@@ -14,7 +14,8 @@ app.use('/img', express.static(__dirname + '/public/img'));
 app.use(express.json());
 
 const client_id = process.env.CLIENT_ID;
-const client_secret = process.env.SECRET_ID;;
+const client_secret = process.env.SECRET_ID;
+//const redirect_uri = 'http://spotify.schibleyj.com/callback';
 const redirect_uri = 'http://localhost:8080/callback';
 
 
