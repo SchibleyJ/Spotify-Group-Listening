@@ -16,6 +16,7 @@ let currentSearchData = [];
                 document.getElementById(i + "song").remove();
             }
             document.getElementById('search-info-p').innerHTML = "Song successfully queued.";
+            currentSearchData = [];
         });
     }
     const getCookie = (name) => {
@@ -88,3 +89,4 @@ let currentSearchData = [];
         if (document.getElementById('search-info-p').innerHTML[1] == "o")
         document.getElementById('search-info-p').innerHTML = "";
     }
+    
