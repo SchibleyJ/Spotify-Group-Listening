@@ -47,13 +47,13 @@ let currentSearchData = [];
             currentSearchData = data;
             
             displayResults(data);
-            document.getElementById('search-info-p').innerHTML = "Showing top 10 results:";
+            document.getElementById('search-info-p').innerHTML = `Showing top ${currentSearchData.length} results:`;
         });
     }
 
     const displayResults = (results) => {
         if ('content' in document.createElement('template')) {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 10 && results[i]; i++) {
                 let parent = document.getElementById('results');
                 let template = document.querySelector('#song-template')
     
